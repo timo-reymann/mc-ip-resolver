@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Minecraft-IP-Resolver</title>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	</head>
+	<body class="container-fluid">
+		<form class="col-md-10 col-md-offset-1">
+			<h1>Minecraft-IP-Resolver</h1>
+			<div class="form-group">
+				<label>Minecraft-Serveraddresse</label>
+				<input id="address" class="form-control input-lg" placeholder="Minecraft-Serveraddresse z. B. gommehd.net">
+			</div>
+			<div class="form-group">
+				<button type="submit" class="btn btn-lg btn-block btn-primary">Addresse zum Joinen ermitteln (Alternativ im Eingabefeld mit Enter bestätigen)</button>
+			</div>
+			<div class="form-group">
+				<div class="well well-lg" id="result"></div>
+			</div>
+		</form>
+		<script>
+			$(document).ready(() => {
+				$("form").on("submit", (e) => {
+					e.preventDefault();
+					$("#result").html("");
+					$.getJSON("api.php?domain=" + $("#address").val()).done((result) => {
+						result.forEach((element) => {
+							$("#result").append("<p>" + element + "</p>");
+						});
+					});
+				});
+			});
+		</script>
+	</body>
+</html>
